@@ -15,8 +15,11 @@ Test your server not just by making HTTP requests to it (though that's a good st
 ```go
 client := &http.Client{
     Transport: &http.Transport{
-        Proxy: http.ProxyURL("http://localhost:XXXXX")
-    }
+        Proxy: http.ProxyURL(&url.URL{
+            Scheme: "http",
+            Host:   "localhost:XXXX",
+        }),
+    },
 }
 resp, err := client.Get("some URL")
 ```
